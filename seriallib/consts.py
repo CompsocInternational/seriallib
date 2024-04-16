@@ -1,0 +1,3 @@
+MOCK_PORT_NAME = "mock"
+
+ATTEMPTS_MAX = 50

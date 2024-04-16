@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "seriallib"
+version = "0.1.0"
+description = ""
+authors = ["Isaac - The456 <the456@the456gamer.dev>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyserial = "^3.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
