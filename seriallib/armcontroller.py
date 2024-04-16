@@ -125,7 +125,6 @@ class ArmController:
                     await asyncio.sleep(1)
 
             print("Received finished_ack for command")
-        finally:
         
 
     async def _get_serial(self) -> serial.Serial:
