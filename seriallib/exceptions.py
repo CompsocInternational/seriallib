@@ -7,3 +7,6 @@ class ArmRetryLimitExceededException(ArmException):
 
 class ArmUnknownOrUnexpectedResponseException(ArmException):
     pass
+
+class ArmInUseException(ArmException):
+    pass
