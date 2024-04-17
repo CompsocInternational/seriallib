@@ -4,9 +4,5 @@ class ArmException(Exception):
 class ArmRetryLimitExceededException(ArmException):
     pass
 
-
 class ArmUnknownOrUnexpectedResponseException(ArmException):
-    pass
-
-class ArmInUseException(ArmException):
     pass
