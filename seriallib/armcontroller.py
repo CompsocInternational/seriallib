@@ -53,6 +53,8 @@ class ArmController:
                     f"Failed to send command after {ATTEMPTS_MAX} attempts"
                 )
             try:
+                # new command starting, ignore all previous responses
+                self._get_serial().read_all()
                 self._get_serial().write(command.value.encode())
                 # if unwritten > 0:
                 # raise serial.SerialException("Could not write all bytes")
