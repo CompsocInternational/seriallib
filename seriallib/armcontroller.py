@@ -78,9 +78,9 @@ class ArmController:
                 )
             try:
                 data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
-                if data == "":
-                    attempts +=1
-                    continue
+                # if data == "":
+                #     attempts +=1
+                #     continue
                 if IncomingArmCommand.ACK.value in data:
                     done = True   
                 else:
@@ -107,9 +107,9 @@ class ArmController:
                 )
             try:
                 data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
-                if data == "":
-                    attempts +=1
-                    continue
+                # if data == "":
+                #     attempts +=1
+                #     continue
                 if IncomingArmCommand.FINISHED.value in data:
                     done = True
                 else:
