@@ -10,6 +10,7 @@ import time
 from seriallib.exceptions import (
     ArmRetryLimitExceededException,
     ArmUnknownOrUnexpectedResponseException,
+    SerialTimeoutException,
 )
 
 
@@ -80,7 +81,7 @@ class ArmController:
                 data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
                 if data == "":
                     # timeout
-                    raise serial.SerialTimeoutException("Custom timeout while reading.")
+                    raise SerialTimeoutException("Custom timeout while reading.")
                 if IncomingArmCommand.ACK.value in data:
                     done = True   
                 else:
@@ -94,6 +95,11 @@ class ArmController:
                 attempts += 1
                 self.serial = None
                 time.sleep(1)
+            except SerialTimeoutException as e:
+                print(
+                    f"timeout reading ack for {command} attempt {attempts}"
+                )
+                attempts += 1
 
         print(f"Received ack for command {command}")
 
@@ -109,7 +115,7 @@ class ArmController:
                 data = self._get_serial().read_until(IncomingArmCommand.FINISHED.value.encode()).decode()
                 if data == "":
                     # timeout
-                    raise serial.SerialTimeoutException("Custom timeout while reading.")
+                    raise SerialTimeoutException("Custom timeout while reading.")
                 if IncomingArmCommand.FINISHED.value in data:
                     done = True
                 else:
@@ -121,6 +127,11 @@ class ArmController:
                 attempts += 1
                 self.serial = None
                 time.sleep(1)
+            except SerialTimeoutException as e:
+                print(
+                    f"timeout reading done for {command} attempt {attempts}"
+                )
+                attempts += 1
 
         print("Received finished_ack for command")
     

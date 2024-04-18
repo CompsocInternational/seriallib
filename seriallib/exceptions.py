@@ -6,3 +6,6 @@ class ArmRetryLimitExceededException(ArmException):
 
 class ArmUnknownOrUnexpectedResponseException(ArmException):
     pass
+
+class SerialTimeoutException(Exception):
+    pass
