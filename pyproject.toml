@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "seriallib"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 authors = ["Isaac - The456 <the456@the456gamer.dev>"]
 readme = "README.md"
