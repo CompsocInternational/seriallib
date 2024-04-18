@@ -78,12 +78,15 @@ class ArmController:
                 )
             try:
                 data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
-                if data == IncomingArmCommand.ACK.value:
-                    done = True
-                # else:
-                    # raise ArmUnknownOrUnexpectedResponseException(
-                        # f"Unexpected response '{data}' to command {command}"
-                    # )
+                if data == "":
+                    attempts +=1
+                    continue
+                if IncomingArmCommand.ACK.value in data:
+                    done = True   
+                else:
+                    raise ArmUnknownOrUnexpectedResponseException(
+                        f"Unexpected response '{data}' to command {command}"
+                    )
             except serial.SerialException as e:
                 print(
                     f"Failed to receive ack for command {command} attempt {attempts}, retrying\n{e}"
@@ -104,11 +107,15 @@ class ArmController:
                 )
             try:
                 data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
-                if data == IncomingArmCommand.FINISHED.value:
+                if data == "":
+                    attempts +=1
+                    continue
+                if IncomingArmCommand.FINISHED.value in data:
                     done = True
-            #         raise ArmUnknownOrUnexpectedResponseException(
-            #             f"Unexpected response '{data}' to command {command}"
-            #         )
+                else:
+                    raise ArmUnknownOrUnexpectedResponseException(
+                        f"Unexpected response '{data}' to command {command}"
+                    )
             except serial.SerialException as e:
                 print(f"Failed to receive finished_ack for command {command} attempt {attempts}, retrying\n{e}")
                 attempts += 1
