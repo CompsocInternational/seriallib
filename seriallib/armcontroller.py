@@ -106,7 +106,7 @@ class ArmController:
                     f"Failed to rcv success after {ATTEMPTS_MAX} attempts"
                 )
             try:
-                data = self._get_serial().read_until(IncomingArmCommand.ACK.value.encode()).decode()
+                data = self._get_serial().read_until(IncomingArmCommand.FINISHED.value.encode()).decode()
                 # if data == "":
                 #     attempts +=1
                 #     continue
